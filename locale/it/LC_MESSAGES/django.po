@@ -1,0 +1,510 @@
+# Translations for the altempo_core_service project.
+# Copyright (C) 2025 Daniel Roy Greenfeld
+# Daniel Roy Greenfeld <daniel-roy-greenfeld@example.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-05 15:46+0000\n"
+"PO-Revision-Date: 2025-12-05 14:00+0000\n"
+"Last-Translator: Altempo Team <team@altempo.com>\n"
+"Language-Team: Italian <it@li.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: altempo_core_service/templates/allauth/layouts/entrance.html:8
+#: altempo_core_service/templates/base.html:98
+msgid "Sign In"
+msgstr "Accedi"
+
+#: altempo_core_service/templates/base.html:83
+msgid "My Profile"
+msgstr "Il mio profilo"
+
+#: altempo_core_service/templates/base.html:87
+msgid "Sign Out"
+msgstr "Esci"
+
+#: altempo_core_service/templates/base.html:93
+msgid "Sign Up"
+msgstr "Registrati"
+
+#: altempo_core_service/users/admin.py:24
+msgid "Personal info"
+msgstr "Informazioni personali"
+
+#: altempo_core_service/users/admin.py:26
+msgid "Permissions"
+msgstr "Permessi"
+
+#: altempo_core_service/users/admin.py:37
+msgid "Important dates"
+msgstr "Date importanti"
+
+#: altempo_core_service/users/apps.py:9
+msgid "Users"
+msgstr "Utenti"
+
+#: altempo_core_service/users/forms.py:23
+#: altempo_core_service/users/tests/test_forms.py:35
+msgid "This username has already been taken."
+msgstr "Questo nome utente è già stato preso."
+
+#: altempo_core_service/users/models.py:15
+msgid "Name of User"
+msgstr "Nome dell'utente"
+
+#: altempo_core_service/users/models.py:18
+msgid "email address"
+msgstr "indirizzo email"
+
+#: altempo_core_service/users/tests/test_views.py:72
+#: altempo_core_service/users/views.py:25
+msgid "Information successfully updated"
+msgstr "Informazioni aggiornate con successo"
+
+#: templates/emails/band_invitation_existing_user.html:4
+#: templates/emails/band_invitation_new_user.html:4
+msgid "Band Invitation"
+msgstr "Invito alla band"
+
+#: templates/emails/band_invitation_existing_user.html:7
+msgid "You've Been Invited!"
+msgstr "Sei stato invitato!"
+
+#: templates/emails/band_invitation_existing_user.html:10
+#, python-format
+msgid ""
+"\n"
+"        Great news! %(inviter_name)s has invited you to join their band, "
+"<strong>%(band_name)s</strong>, on Altempo.\n"
+"        "
+msgstr ""
+"\n"
+"Ottime notizie! %(inviter_name)s ti ha invitato a unirti alla sua band, "
+"<strong>%(band_name)s</strong>, su Altempo.\n"
+"        "
+
+#: templates/emails/band_invitation_existing_user.html:22
+msgid "Accept Invitation"
+msgstr "Accetta invito"
+
+#: templates/emails/band_invitation_existing_user.html:27
+msgid "Decline"
+msgstr "Rifiuta"
+
+#: templates/emails/band_invitation_existing_user.html:37
+#: templates/emails/band_invitation_new_user.html:30
+#, python-format
+msgid ""
+"\n"
+"        If you weren't expecting this invitation, you can ignore this email. "
+"This invitation will expire in %(expiry_days)s days.\n"
+"        "
+msgstr ""
+"\n"
+"Se non ti aspettavi questo invito, puoi ignorare questa email. Questo invito "
+"scadrà tra %(expiry_days)s giorni.\n"
+"        "
+
+#: templates/emails/band_invitation_new_user.html:7
+msgid "You've Been Invited to Join Altempo!"
+msgstr "Sei stato invitato a unirti ad Altempo!"
+
+#: templates/emails/band_invitation_new_user.html:10
+#, python-format
+msgid ""
+"\n"
+"        %(inviter_name)s has invited you to join their band, "
+"<strong>%(band_name)s</strong>, on Altempo - the platform for musicians to "
+"collaborate and manage their music together.\n"
+"        "
+msgstr ""
+"\n"
+"%(inviter_name)s ti ha invitato a unirti alla sua band, "
+"<strong>%(band_name)s</strong>, su Altempo - la piattaforma per musicisti "
+"per collaborare e gestire la loro musica insieme.\n"
+"        "
+
+#: templates/emails/band_invitation_new_user.html:16
+msgid ""
+"To accept this invitation, you'll need to create a free Altempo account "
+"first."
+msgstr ""
+"Per accettare questo invito, dovrai prima creare un account Altempo gratuito."
+
+#: templates/emails/band_invitation_new_user.html:23
+msgid "Create Account & Join"
+msgstr "Crea account e unisciti"
+
+#: templates/emails/base_email.html:406
+msgid "Help Center"
+msgstr "Centro assistenza"
+
+#: templates/emails/base_email.html:412
+msgid "Terms of Service"
+msgstr "Termini di servizio"
+
+#: templates/emails/base_email.html:418
+msgid "Privacy Policy"
+msgstr "Politica sulla privacy"
+
+#: templates/emails/base_email.html:425
+msgid "All rights reserved."
+msgstr "Tutti i diritti riservati."
+
+#: templates/emails/base_email.html:433
+msgid "Unsubscribe"
+msgstr "Annulla iscrizione"
+
+#: templates/emails/email_verification.html:4
+#: templates/emails/email_verification.html:7
+msgid "Verify Your Email"
+msgstr "Verifica la tua email"
+
+#: templates/emails/email_verification.html:10
+#, python-format
+msgid ""
+"\n"
+"        Hi %(user_name)s, welcome to Altempo! We're excited to have you on "
+"board. Please click the button below to confirm your account and get started "
+"on your musical journey.\n"
+"        "
+msgstr ""
+"\n"
+"Ciao %(user_name)s, benvenuto su Altempo! Siamo entusiasti di averti con "
+"noi. Per favore clicca il pulsante qui sotto per confermare il tuo account e "
+"iniziare il tuo viaggio musicale.\n"
+"        "
+
+#: templates/emails/email_verification.html:19
+msgid "Confirm My Account"
+msgstr "Conferma il mio account"
+
+#: templates/emails/email_verification.html:26
+#, python-format
+msgid ""
+"\n"
+"        If you did not sign up for an Altempo account, you can safely ignore "
+"this email. This link will expire in %(expiry_hours)s hours.\n"
+"        "
+msgstr ""
+"\n"
+"Se non ti sei registrato per un account Altempo, puoi ignorare questa email "
+"in tutta sicurezza. Questo link scadrà tra %(expiry_hours)s ore.\n"
+"        "
+
+#: authentication/views.py:84
+msgid "Password reset e-mail has not been sent."
+msgstr "L'email di reimpostazione della password non è stata inviata."
+
+#: authentication/views.py:91
+msgid "Password reset e-mail has been sent."
+msgstr "L'email di reimpostazione della password è stata inviata."
+
+#: authentication/views.py:568
+msgid "The verification link is invalid or has expired."
+msgstr "Il link di verifica non è valido o è scaduto."
+
+#: musicians/views.py:510
+msgid "You are not the owner of this project."
+msgstr "Non sei il proprietario di questo progetto."
+
+#: musicians/views.py:514
+msgid "You can't invite members to an individual project."
+msgstr "Non puoi invitare membri a un progetto individuale."
+
+#: musicians/views.py:525
+#: musicians/views.py:592
+msgid "New Band Invitation: %(band_name)s"
+msgstr "Nuovo invito alla band: %(band_name)s"
+
+#: musicians/views.py:528
+#: musicians/views.py:596
+msgid "Invitation from %(owner_name)s"
+msgstr "Invito da %(owner_name)s"
+
+#: musicians/views.py:537
+msgid "Invitation sent successfully."
+msgstr "Invito inviato con successo."
+
+#: musicians/views.py:547
+#: musicians/views.py:606
+msgid "Failed to send invitation email. Please try again later."
+msgstr "Impossibile inviare l'email di invito. Per favore riprova più tardi."
+
+#: musicians/views.py:616
+msgid "Invitations sent successfully."
+msgstr "Inviti inviati con successo."
+
+#: templates/emails/email_verification_error.html:4
+#: templates/emails/email_verification_error.html:7
+msgid "Email Verification Failed"
+msgstr "Verifica email fallita"
+
+#: templates/emails/email_verification_error.html:13
+msgid ""
+"We're sorry, but we couldn't verify your email address. The verification "
+"link may be invalid or has expired."
+msgstr ""
+"Siamo spiacenti, ma non siamo riusciti a verificare il tuo indirizzo email. "
+"Il link di verifica potrebbe non essere valido o essere scaduto."
+
+#: templates/emails/email_verification_error.html:18
+msgid ""
+"Don't worry! You can request a new verification email to complete the "
+"activation of your Altempo account."
+msgstr ""
+"Non preoccuparti! Puoi richiedere una nuova email di verifica per completare "
+"l'attivazione del tuo account Altempo."
+
+#: templates/emails/email_verification_error.html:25
+msgid "Go to Altempo"
+msgstr "Vai ad Altempo"
+
+#: templates/emails/email_verification_error.html:32
+msgid ""
+"If you continue to experience issues, please contact our support team for "
+"assistance."
+msgstr ""
+"Se continui a riscontrare problemi, contatta il nostro team di supporto per "
+"ricevere assistenza."
+
+#: templates/emails/email_verification_success.html:4
+msgid "Email Verified Successfully"
+msgstr "Email verificata con successo"
+
+#: templates/emails/email_verification_success.html:7
+msgid "Email Verified Successfully!"
+msgstr "Email verificata con successo!"
+
+#: templates/emails/email_verification_success.html:10
+#, python-format
+msgid ""
+"\n"
+"        Hi %(user_name)s, great news! Your email address has been "
+"successfully verified. Your Altempo account is now fully activated and ready "
+"to use.\n"
+"        "
+msgstr ""
+"\n"
+"Ciao %(user_name)s, ottime notizie! Il tuo indirizzo email è stato "
+"verificato con successo. Il tuo account Altempo è ora completamente attivato "
+"e pronto all'uso.\n"
+"        "
+
+#: templates/emails/email_verification_success.html:16
+msgid ""
+"You can now enjoy all the features Altempo has to offer, including creating "
+"and joining bands, collaborating with other musicians, and managing your "
+"music projects."
+msgstr ""
+"Ora puoi goderti tutte le funzionalità che Altempo ha da offrire, inclusa la "
+"creazione e l'adesione a band, la collaborazione con altri musicisti e la "
+"gestione dei tuoi progetti musicali."
+
+#: templates/emails/email_verification_success.html:23
+msgid "Go to Dashboard"
+msgstr "Vai alla dashboard"
+
+#: templates/emails/email_verification_success.html:30
+msgid ""
+"If you have any questions or need assistance, feel free to contact our "
+"support team."
+msgstr ""
+"Se hai domande o hai bisogno di assistenza, non esitare a contattare il "
+"nostro team di supporto."
+
+#: templates/emails/password_recovery.html:4
+#: templates/emails/password_recovery.html:7
+msgid "Reset Your Password"
+msgstr "Reimposta la tua password"
+
+#: templates/emails/password_recovery.html:10
+#, python-format
+msgid ""
+"\n"
+"        Hi %(user_name)s, we received a request to reset the password for "
+"your Altempo account. Click the button below to set a new password.\n"
+"        "
+msgstr ""
+"\n"
+"Ciao %(user_name)s, abbiamo ricevuto una richiesta di reimpostazione della "
+"password per il tuo account Altempo. Clicca il pulsante qui sotto per "
+"impostare una nuova password.\n"
+"        "
+
+#: templates/emails/password_recovery.html:19
+msgid "Reset Password"
+msgstr "Reimposta password"
+
+#: templates/emails/password_recovery.html:26
+#, python-format
+msgid ""
+"\n"
+"        If you did not request a password reset, please ignore this email or "
+"contact support if you have concerns. This link will expire in "
+"%(expiry_hours)s hour.\n"
+"        "
+msgstr ""
+"\n"
+"Se non hai richiesto una reimpostazione della password, per favore ignora "
+"questa email o contatta il supporto se hai dubbi. Questo link scadrà tra "
+"%(expiry_hours)s ora.\n"
+"        "
+
+#: templates/emails/password_recovery.html:32
+msgid "For security reasons, never share this link with anyone."
+msgstr "Per motivi di sicurezza, non condividere mai questo link con nessuno."
+
+#: utils/band_invite.py:145
+#, python-format
+msgid "%(inviter_name)s has invited you to join %(band_name)s on Altempo"
+msgstr "%(inviter_name)s ti ha invitato a unirti a %(band_name)s su Altempo"
+
+#: utils/email_sender.py:141 utils/email_sender.py:188
+#, python-format
+msgid "You've been invited to join %(band_name)s on Altempo"
+msgstr "Sei stato invitato a unirti a %(band_name)s su Altempo"
+
+#: utils/email_sender.py:232
+msgid "Verify your Altempo account"
+msgstr "Verifica il tuo account Altempo"
+
+#: utils/email_sender.py:271
+msgid "Your Altempo account is verified!"
+msgstr "Il tuo account Altempo è verificato!"
+
+#: utils/email_sender.py:311
+msgid "Reset your Altempo password"
+msgstr "Reimposta la tua password Altempo"
+
+#: utils/passwordRecovery.py:105
+#, python-format
+msgid "Reset your Altempo password, %(user_name)s"
+msgstr "Reimposta la tua password Altempo, %(user_name)s"
+
+#: utils/verification.py:132
+#, python-format
+msgid "Verify your Altempo account, %(user_name)s"
+msgstr "Verifica il tuo account Altempo, %(user_name)s"
+
+#: utils/verification.py:249
+#, python-format
+msgid "Your Altempo account is verified, %(user_name)s!"
+msgstr "Il tuo account Altempo è verificato, %(user_name)s!"
+
+# Invitation response templates
+#: templates/emails/invitation_accepted.html:4
+msgid "Invitation Accepted"
+msgstr "Invito Accettato"
+
+#: templates/emails/invitation_accepted.html:7
+msgid "Invitation Accepted!"
+msgstr "Invito Accettato!"
+
+#: templates/emails/invitation_accepted.html:10
+#, python-format
+msgid ""
+"\n"
+"        Hi %(user_name)s, congratulations! You have successfully accepted the invitation to join %(band_name)s.\n"
+"        "
+msgstr ""
+"\n"
+"Ciao %(user_name)s, congratulazioni! Hai accettato con successo l'invito a unirti a %(band_name)s.\n"
+"        "
+
+#: templates/emails/invitation_accepted.html:15
+msgid "You are now a member of the band and can start collaborating with your bandmates, managing projects, and sharing your music with the world."
+msgstr "Ora sei un membro della band e puoi iniziare a collaborare con i tuoi compagni di band, gestire progetti e condividere la tua musica con il mondo."
+
+#: templates/emails/invitation_accepted.html:22
+msgid "View Band Profile"
+msgstr "Visualizza Profilo della Band"
+
+#: templates/emails/invitation_declined.html:4
+msgid "Invitation Declined"
+msgstr "Invito Rifiutato"
+
+#: templates/emails/invitation_declined.html:10
+#, python-format
+msgid ""
+"\n"
+"        Hi %(user_name)s, you have declined the invitation to join %(band_name)s.\n"
+"        "
+msgstr ""
+"\n"
+"Ciao %(user_name)s, hai rifiutato l'invito a unirti a %(band_name)s.\n"
+"        "
+
+#: templates/emails/invitation_declined.html:15
+msgid "The band owner has been notified of your decision. You can always accept future invitations from other bands or create your own music project."
+msgstr "Il proprietario della band è stato informato della tua decisione. Puoi sempre accettare futuri inviti da altre band o creare il tuo progetto musicale."
+
+#: templates/emails/invitation_error.html:4
+msgid "Invitation Error"
+msgstr "Errore Invito"
+
+#: templates/emails/invitation_error.html:7
+msgid "Unable to Process Invitation"
+msgstr "Impossibile Elaborare l'Invito"
+
+#: templates/emails/invitation_error.html:10
+#, python-format
+msgid ""
+"\n"
+"        Hi %(user_name)s, we encountered an issue while processing your invitation response.\n"
+"        "
+msgstr ""
+"\n"
+"Ciao %(user_name)s, abbiamo riscontrato un problema durante l'elaborazione della tua risposta all'invito.\n"
+"        "
+
+#: templates/emails/invitation_error.html:19
+msgid "This could happen for several reasons:"
+msgstr "Questo potrebbe accadere per diversi motivi:"
+
+#: templates/emails/invitation_error.html:23
+msgid "The invitation has expired"
+msgstr "L'invito è scaduto"
+
+#: templates/emails/invitation_error.html:24
+msgid "The invitation has already been accepted or declined"
+msgstr "L'invito è già stato accettato o rifiutato"
+
+#: templates/emails/invitation_error.html:25
+msgid "The invitation link is invalid or corrupted"
+msgstr "Il link dell'invito non è valido o è corrotto"
+
+#: templates/emails/invitation_error.html:26
+msgid "The invitation has been cancelled by the band owner"
+msgstr "L'invito è stato annullato dal proprietario della band"
+
+#: templates/emails/invitation_error.html:41
+msgid "If you believe this is an error or need assistance, please contact our support team or ask the band owner to send you a new invitation."
+msgstr "Se ritieni che si tratti di un errore o hai bisogno di assistenza, contatta il nostro team di supporto o chiedi al proprietario della band di inviarti un nuovo invito."
+
+# View error messages for invitation processing
+#: musicians/views.py:693
+msgid "The invitation has expired."
+msgstr "L'invito è scaduto."
+
+#: musicians/views.py:700
+msgid "The invitation has already been accepted or declined."
+msgstr "L'invito è già stato accettato o rifiutato."
+
+#: musicians/views.py:708
+msgid "Invalid action. Please use the link from your invitation email."
+msgstr "Azione non valida. Utilizza il link dalla tua email di invito."
+
+#: musicians/views.py:717
+msgid "Missing authentication token. Please use the link from your invitation email."
+msgstr "Token di autenticazione mancante. Utilizza il link dalla tua email di invito."
+
+#: musicians/views.py:796
+msgid "An unexpected error occurred. Please try again or contact support."
+msgstr "Si è verificato un errore imprevisto. Riprova o contatta il supporto."

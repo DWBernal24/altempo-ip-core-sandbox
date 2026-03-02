@@ -1,0 +1,40 @@
+{% extends "emails/base_email.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Invitation Accepted" %} - Altempo{% endblock %}
+
+{% block content %}
+    <h1 class="headline">{% trans "Invitation Accepted!" %}</h1>
+
+    <p class="body-text">
+        {% blocktrans with user_name=user_name band_name=band_name %}
+        Hi {{ user_name }}, congratulations! You have successfully accepted the invitation to join {{ band_name }}.
+        {% endblocktrans %}
+    </p>
+
+    <p class="body-text">
+        {% trans "You are now a member of the band and can start collaborating with your bandmates, managing projects, and sharing your music with the world." %}
+    </p>
+
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td class="button-container">
+                <a href="{{ band_url }}" class="button-primary" style="display: inline-block; min-width: 160px; text-align: center;">
+                    {% trans "View Band Profile" %}
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <p class="meta-text">
+        {% trans "If you have any questions or need assistance, feel free to contact our support team." %}
+    </p>
+{% endblock %}
+
+{% block help_center_url %}{{ help_center_url }}{% endblock %}
+{% block terms_url %}{{ terms_url }}{% endblock %}
+{% block privacy_url %}{{ privacy_url }}{% endblock %}
+{% block unsubscribe_url %}{{ unsubscribe_url }}{% endblock %}
+{% block instagram_url %}{{ instagram_url }}{% endblock %}
+{% block linkedin_url %}{{ linkedin_url }}{% endblock %}
+{% block facebook_url %}{{ facebook_url }}{% endblock %}

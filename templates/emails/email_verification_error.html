@@ -1,0 +1,42 @@
+{% extends "emails/base_email.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Email Verification Failed" %} - Altempo{% endblock %}
+
+{% block content %}
+    <h1 class="headline">{% trans "Email Verification Failed" %}</h1>
+
+    <p class="body-text">
+        {% if error_message %}
+            {{ error_message }}
+        {% else %}
+            {% trans "We're sorry, but we couldn't verify your email address. The verification link may be invalid or has expired." %}
+        {% endif %}
+    </p>
+
+    <p class="body-text">
+        {% trans "Don't worry! You can request a new verification email to complete the activation of your Altempo account." %}
+    </p>
+
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td class="button-container">
+                <a href="{{ app_link }}" class="button-primary" style="display: inline-block; min-width: 160px; text-align: center;">
+                    {% trans "Go to Altempo" %}
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <p class="meta-text">
+        {% trans "If you continue to experience issues, please contact our support team for assistance." %}
+    </p>
+{% endblock %}
+
+{% block help_center_url %}{{ help_center_link }}{% endblock %}
+{% block terms_url %}{{ terms_link }}{% endblock %}
+{% block privacy_url %}{{ privacy_link }}{% endblock %}
+{% block unsubscribe_url %}{{ unsubscribe_link }}{% endblock %}
+{% block instagram_url %}{{ instagram_link }}{% endblock %}
+{% block linkedin_url %}{{ linkedin_link }}{% endblock %}
+{% block facebook_url %}{{ facebook_link }}{% endblock %}

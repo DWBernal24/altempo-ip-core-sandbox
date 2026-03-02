@@ -1,0 +1,38 @@
+{% extends "emails/base_email.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Verify Your Email" %} - Altempo{% endblock %}
+
+{% block content %}
+    <h1 class="headline">{% trans "Verify Your Email" %}</h1>
+
+    <p class="body-text">
+        {% blocktrans with user_name=user_name %}
+        Hi {{ user_name }}, welcome to Altempo! We're excited to have you on board. Please click the button below to confirm your account and get started on your musical journey.
+        {% endblocktrans %}
+    </p>
+
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td class="button-container">
+                <a href="{{ verification_url }}" class="button-primary" style="display: inline-block; min-width: 180px; text-align: center;">
+                    {% trans "Confirm My Account" %}
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <p class="meta-text">
+        {% blocktrans with expiry_hours=expiry_hours %}
+        If you did not sign up for an Altempo account, you can safely ignore this email. This link will expire in {{ expiry_hours }} hours.
+        {% endblocktrans %}
+    </p>
+{% endblock %}
+
+{% block help_center_url %}{{ help_center_url }}{% endblock %}
+{% block terms_url %}{{ terms_url }}{% endblock %}
+{% block privacy_url %}{{ privacy_url }}{% endblock %}
+{% block unsubscribe_url %}{{ unsubscribe_url }}{% endblock %}
+{% block instagram_url %}{{ instagram_url }}{% endblock %}
+{% block linkedin_url %}{{ linkedin_url }}{% endblock %}
+{% block facebook_url %}{{ facebook_url }}{% endblock %}

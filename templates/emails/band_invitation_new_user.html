@@ -1,0 +1,42 @@
+{% extends "emails/base_email.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Band Invitation" %} - Altempo{% endblock %}
+
+{% block content %}
+    <h1 class="headline">{% trans "You've Been Invited to Join Altempo!" %}</h1>
+
+    <p class="body-text">
+        {% blocktrans with inviter_name=inviter_name band_name=band_name %}
+        {{ inviter_name }} has invited you to join their band, <strong>{{ band_name }}</strong>, on Altempo - the platform for musicians to collaborate and manage their music together.
+        {% endblocktrans %}
+    </p>
+
+    <p class="body-text">
+        {% trans "To accept this invitation, you'll need to create a free Altempo account first." %}
+    </p>
+
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td class="button-container">
+                <a href="{{ signup_url }}" class="button-primary" style="display: inline-block; min-width: 160px; text-align: center;">
+                    {% trans "Create Account & Join" %}
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <p class="meta-text">
+        {% blocktrans with expiry_days=expiry_days %}
+        If you weren't expecting this invitation, you can ignore this email. This invitation will expire in {{ expiry_days }} days.
+        {% endblocktrans %}
+    </p>
+{% endblock %}
+
+{% block help_center_url %}{{ help_center_url }}{% endblock %}
+{% block terms_url %}{{ terms_url }}{% endblock %}
+{% block privacy_url %}{{ privacy_url }}{% endblock %}
+{% block unsubscribe_url %}{{ unsubscribe_url }}{% endblock %}
+{% block instagram_url %}{{ instagram_url }}{% endblock %}
+{% block linkedin_url %}{{ linkedin_url }}{% endblock %}
+{% block facebook_url %}{{ facebook_url }}{% endblock %}

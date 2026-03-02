@@ -1,0 +1,441 @@
+{% load i18n static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}"
+>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Altempo{% endblock %}</title>
+    <style type="text/css">
+      /* Client-specific Styles */
+      body {
+        margin: 0;
+        padding: 0;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      table {
+        border-collapse: collapse;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+      }
+      img {
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+        -ms-interpolation-mode: bicubic;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      /* Reset Styles */
+      .ReadMsgBody {
+        width: 100%;
+      }
+      .ExternalClass {
+        width: 100%;
+      }
+      .ExternalClass,
+      .ExternalClass p,
+      .ExternalClass span,
+      .ExternalClass font,
+      .ExternalClass td,
+      .ExternalClass div {
+        line-height: 100%;
+      }
+
+      /* Custom Styles */
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #f7f5f8;
+        margin: 0;
+        padding: 0;
+      }
+
+      .email-container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        padding: 32px 20px;
+      }
+
+      .logo-container {
+        display: inline-block;
+      }
+
+      .logo-icon {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+
+      .logo-text {
+        display: inline-block;
+        font-size: 36px;
+        font-weight: bold;
+        color: #000000;
+        vertical-align: middle;
+        letter-spacing: -0.05em;
+      }
+
+      .main-content {
+        background-color: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 16px;
+        padding: 48px 40px;
+        margin: 0 20px;
+      }
+
+      .headline {
+        color: #000000;
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        margin: 16px 0 12px 0;
+        line-height: 1.2;
+      }
+
+      .body-text {
+        color: #3f3f46;
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: center;
+        margin: 12px 0;
+      }
+
+      .button-container {
+        text-align: center;
+        padding: 24px 16px;
+      }
+
+      .button-primary {
+        display: inline-block;
+        background-color: #7605e1;
+        color: #ffffff !important;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 14px 32px;
+        border-radius: 9999px;
+        letter-spacing: 0.015em;
+      }
+
+      .button-secondary {
+        display: inline-block;
+        background-color: #e4e4e7;
+        color: #18181b !important;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        padding: 14px 32px;
+        border-radius: 9999px;
+        letter-spacing: 0.015em;
+      }
+
+      .meta-text {
+        color: #71717a;
+        font-size: 14px;
+        line-height: 1.5;
+        text-align: center;
+        margin: 12px 0;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 40px 20px 32px 20px;
+      }
+
+      .social-links {
+        margin-bottom: 24px;
+      }
+
+      .social-icon {
+        display: inline-block;
+        margin: 0 8px;
+        width: 24px;
+        height: 24px;
+        opacity: 0.6;
+      }
+
+      .footer-links {
+        color: #71717a;
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+
+      .footer-link {
+        color: #71717a;
+        text-decoration: none;
+        margin: 0 8px;
+      }
+
+      .footer-link:hover {
+        color: #7605e1;
+      }
+
+      .footer-separator {
+        color: #d4d4d8;
+        margin: 0 4px;
+      }
+
+      .footer-copyright {
+        color: #a1a1aa;
+        font-size: 12px;
+        margin-top: 24px;
+      }
+
+      .footer-unsubscribe {
+        color: #a1a1aa;
+        font-size: 12px;
+        margin-top: 8px;
+        text-decoration: underline;
+      }
+
+      .footer-unsubscribe:hover {
+        color: #7605e1;
+      }
+
+      /* Responsive Styles */
+      @media screen and (max-width: 600px) {
+        .email-container {
+          width: 100% !important;
+        }
+
+        .main-content {
+          padding: 32px 24px !important;
+          margin: 0 10px !important;
+        }
+
+        .headline {
+          font-size: 24px !important;
+        }
+
+        .body-text {
+          font-size: 15px !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      width="100%"
+    >
+      <tr>
+        <td style="background-color: #f7f5f8; padding: 20px 0">
+          <table
+            role="presentation"
+            class="email-container"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            align="center"
+            width="600"
+          >
+            <!-- Header -->
+            <tr>
+              <td class="header">
+                <table
+                  role="presentation"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  width="100%"
+                >
+                  <tr>
+                    <td align="center">
+                      <a
+                        href="{{ site_url|default:'https://altempo.dev' }}"
+                        style="text-decoration: none; display: inline-block"
+                      >
+                        {% if logo_url %}
+                        <!--[if mso]>
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                              <tr>
+                                <td>
+                          <![endif]-->
+                        <img
+                          src="https://assets.altempo.dev/static/images/logo.png"
+                          alt="Altempo"
+                          width="200"
+                          style="
+                            display: block;
+                            width: 200px;
+                            height: auto;
+                            max-width: 100%;
+                            font-family:
+                              &quot;Helvetica Neue&quot;, Helvetica, Arial,
+                              sans-serif;
+                            font-size: 36px;
+                            font-weight: bold;
+                            color: #000000;
+                          "
+                        />
+                        <!--[if mso]>
+                                </td>
+                              </tr>
+                            </table>
+                          <![endif]-->
+                        {% else %}
+                        <!-- Text-based fallback when no logo_url is provided -->
+                        <table
+                          role="presentation"
+                          cellspacing="0"
+                          cellpadding="0"
+                          border="0"
+                          style="margin: 0 auto"
+                        >
+                          <tr>
+                            <td
+                              style="vertical-align: middle; padding-right: 8px"
+                            >
+                              <div
+                                style="
+                                  display: inline-block;
+                                  background-color: #7605e1;
+                                  width: 40px;
+                                  height: 40px;
+                                  border-radius: 8px;
+                                  text-align: center;
+                                  line-height: 40px;
+                                  color: #ffffff;
+                                  font-size: 24px;
+                                  font-weight: bold;
+                                "
+                              >
+                                ♪
+                              </div>
+                            </td>
+                            <td style="vertical-align: middle">
+                              <span
+                                style="
+                                  font-size: 36px;
+                                  font-weight: bold;
+                                  color: #000000;
+                                  letter-spacing: -0.05em;
+                                  line-height: 1;
+                                  font-family:
+                                    &quot;Helvetica Neue&quot;, Helvetica,
+                                    Arial, sans-serif;
+                                "
+                                >Altempo</span
+                              >
+                            </td>
+                          </tr>
+                        </table>
+                        {% endif %}
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Main Content -->
+            <tr>
+              <td class="main-content">
+                {% block content %}
+                <!-- Content goes here -->
+                {% endblock %}
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td class="footer">
+                <!-- Social Links -->
+                <div class="social-links">
+                  <a
+                    href="{% block instagram_url %}#{% endblock %}"
+                    class="social-icon"
+                  >
+                    <img
+                      src="https://assets.altempo.dev/static/images/instagram-new.png"
+                      alt="Instagram"
+                      width="24"
+                      height="24"
+                      style="display: inline-block"
+                    />
+                  </a>
+                  <a
+                    href="{% block linkedin_url %}#{% endblock %}"
+                    class="social-icon"
+                  >
+                    <img
+                      src="https://assets.altempo.dev/static/images/linkedin.png"
+                      alt="LinkedIn"
+                      width="24"
+                      height="24"
+                      style="display: inline-block"
+                    />
+                  </a>
+                  <a
+                    href="{% block facebook_url %}#{% endblock %}"
+                    class="social-icon"
+                  >
+                    <img
+                      src="https://assets.altempo.dev/static/images/facebook-new.png"
+                      alt="Facebook"
+                      width="24"
+                      height="24"
+                      style="display: inline-block"
+                    />
+                  </a>
+                </div>
+
+                <!-- Footer Links -->
+                <div class="footer-links">
+                  <a
+                    href="{% block help_center_url %}#{% endblock %}"
+                    class="footer-link"
+                    >{% trans "Help Center" %}</a
+                  >
+                  <span class="footer-separator">•</span>
+                  <a
+                    href="{% block terms_url %}#{% endblock %}"
+                    class="footer-link"
+                    >{% trans "Terms of Service" %}</a
+                  >
+                  <span class="footer-separator">•</span>
+                  <a
+                    href="{% block privacy_url %}#{% endblock %}"
+                    class="footer-link"
+                    >{% trans "Privacy Policy" %}</a
+                  >
+                </div>
+
+                <!-- Copyright -->
+                <div class="footer-copyright">
+                  {% now "Y" as current_year %} © {{ current_year }} Altempo
+                  Inc. {% trans "All rights reserved." %}
+                </div>
+
+                <!-- Unsubscribe -->
+                <div>
+                  <a
+                    href="{% block unsubscribe_url %}#{% endblock %}"
+                    class="footer-unsubscribe"
+                    >{% trans "Unsubscribe" %}</a
+                  >
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

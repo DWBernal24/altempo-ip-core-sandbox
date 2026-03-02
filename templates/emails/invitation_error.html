@@ -1,0 +1,51 @@
+{% extends "emails/base_email.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Invitation Error" %} - Altempo{% endblock %}
+
+{% block content %}
+    <h1 class="headline">{% trans "Unable to Process Invitation" %}</h1>
+
+    <p class="body-text">
+        {% blocktrans with user_name=user_name %}
+        Hi {{ user_name }}, we encountered an issue while processing your invitation response.
+        {% endblocktrans %}
+    </p>
+
+    <p class="body-text" style="color: #dc2626; font-weight: 600;">
+        {{ error_message }}
+    </p>
+
+    <p class="body-text">
+        {% trans "This could happen for several reasons:" %}
+    </p>
+
+    <ul style="color: #3f3f46; font-size: 16px; line-height: 1.6; text-align: left; margin: 12px auto; max-width: 400px;">
+        <li>{% trans "The invitation has expired" %}</li>
+        <li>{% trans "The invitation has already been accepted or declined" %}</li>
+        <li>{% trans "The invitation link is invalid or corrupted" %}</li>
+        <li>{% trans "The invitation has been cancelled by the band owner" %}</li>
+    </ul>
+
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td class="button-container">
+                <a href="{{ dashboard_url }}" class="button-primary" style="display: inline-block; min-width: 160px; text-align: center;">
+                    {% trans "Go to Dashboard" %}
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <p class="meta-text">
+        {% trans "If you believe this is an error or need assistance, please contact our support team or ask the band owner to send you a new invitation." %}
+    </p>
+{% endblock %}
+
+{% block help_center_url %}{{ help_center_url }}{% endblock %}
+{% block terms_url %}{{ terms_url }}{% endblock %}
+{% block privacy_url %}{{ privacy_url }}{% endblock %}
+{% block unsubscribe_url %}{{ unsubscribe_url }}{% endblock %}
+{% block instagram_url %}{{ instagram_url }}{% endblock %}
+{% block linkedin_url %}{{ linkedin_url }}{% endblock %}
+{% block facebook_url %}{{ facebook_url }}{% endblock %}

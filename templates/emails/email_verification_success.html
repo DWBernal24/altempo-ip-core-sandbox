@@ -1,0 +1,40 @@
+{% extends "emails/base_email.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Email Verified Successfully" %} - Altempo{% endblock %}
+
+{% block content %}
+    <h1 class="headline">{% trans "Email Verified Successfully!" %}</h1>
+
+    <p class="body-text">
+        {% blocktrans with user_name=user_name %}
+        Hi {{ user_name }}, great news! Your email address has been successfully verified. Your Altempo account is now fully activated and ready to use.
+        {% endblocktrans %}
+    </p>
+
+    <p class="body-text">
+        {% trans "You can now enjoy all the features Altempo has to offer, including creating and joining bands, collaborating with other musicians, and managing your music projects." %}
+    </p>
+
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td class="button-container">
+                <a href="{{ dashboard_url }}" class="button-primary" style="display: inline-block; min-width: 160px; text-align: center;">
+                    {% trans "Go to Dashboard" %}
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <p class="meta-text">
+        {% trans "If you have any questions or need assistance, feel free to contact our support team." %}
+    </p>
+{% endblock %}
+
+{% block help_center_url %}{{ help_center_url }}{% endblock %}
+{% block terms_url %}{{ terms_url }}{% endblock %}
+{% block privacy_url %}{{ privacy_url }}{% endblock %}
+{% block unsubscribe_url %}{{ unsubscribe_url }}{% endblock %}
+{% block instagram_url %}{{ instagram_url }}{% endblock %}
+{% block linkedin_url %}{{ linkedin_url }}{% endblock %}
+{% block facebook_url %}{{ facebook_url }}{% endblock %}

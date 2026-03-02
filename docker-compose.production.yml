@@ -1,0 +1,71 @@
+volumes:
+  production_traefik: {}
+  production_redis_data: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: altempo_core_service_production_django
+    environment:
+      USE_DOCKER: 'yes'
+      IPYTHONDIR: '/app/.ipython'
+      DJANGO_SETTINGS_MODULE: 'config.settings.production'
+    env_file:
+      - .env
+    command: /start
+    networks:
+      - web
+
+  traefik:
+    build:
+      context: .
+      dockerfile: ./compose/production/traefik/Dockerfile
+    image: altempo_core_service_production_traefik
+    depends_on:
+      - django
+    volumes:
+      - production_traefik:/etc/traefik/acme
+    ports:
+      - '0.0.0.0:80:80'
+      - '0.0.0.0:443:443'
+      - '0.0.0.0:5555:5555'
+    networks:
+      - web
+
+  redis:
+    image: docker.io/redis:6
+    profiles: ['disabled']
+    volumes:
+      - production_redis_data:/data
+    networks:
+      - web
+
+  celeryworker:
+    <<: *django
+    profiles: ['disabled']
+    image: altempo_core_service_production_celeryworker
+    command: /start-celeryworker
+    networks:
+      - web
+
+  celerybeat:
+    <<: *django
+    profiles: ['disabled']
+    image: altempo_core_service_production_celerybeat
+    command: /start-celerybeat
+    networks:
+      - web
+
+  flower:
+    <<: *django
+    profiles: ['disabled']
+    image: altempo_core_service_production_flower
+    command: /start-flower
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

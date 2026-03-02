@@ -1,0 +1,11 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+{{ block.super }}
+<div class="module">
+    <h2>Quick Actions</h2>
+    <ul>
+        <li><a href="{% url 'create_admin_user' %}">Create Admin User</a></li>
+    </ul>
+</div>
+{% endblock %}

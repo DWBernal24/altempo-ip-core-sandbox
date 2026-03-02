@@ -1,0 +1,32 @@
+volumes:
+  altempo_core_service_local_postgres_data: {}
+  altempo_core_service_local_postgres_data_backups: {}
+  altempo_core_service_local_redis_data: {}
+  django_site_packages: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: altempo_core_service_local_django
+    container_name: altempo_core_service_local_django
+    depends_on:
+      - redis
+    volumes:
+      - .:/app:z
+      - django_site_packages:/usr/local/lib/python3.12/site-packages
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - '8000:8000'
+    command: /start
+
+  redis:
+    image: docker.io/redis:6
+    container_name: altempo_core_service_local_redis
+
+    volumes:
+      - altempo_core_service_local_redis_data:/data
+

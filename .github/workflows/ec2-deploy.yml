@@ -1,0 +1,155 @@
+name: Build and Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  AWS_REGION: us-east-2
+  ENV_REF: ${{ github.ref == 'refs/heads/main' && 'prod' || 'dev' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        id: login-aws
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./compose/production/django/Dockerfile
+          push: true
+          tags: ${{ steps.login-ecr.outputs.registry }}/altempo/backend:${{ env.ENV_REF }}-${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push Traefik image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./compose/production/traefik/Dockerfile
+          push: true
+          tags: ${{ steps.login-ecr.outputs.registry }}/altempo/traefik:${{ env.ENV_REF }}-${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        id: login-aws
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Generate .env file
+        run: |
+          cat > .env <<EOL
+          DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+          DJANGO_AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          DJANGO_AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DJANGO_AWS_STORAGE_BUCKET_NAME=${{ secrets.AWS_STORAGE_BUCKET }}
+          DJANGO_AWS_S3_REGION_NAME=${{ secrets.AWS_S3_REGION_NAME }}
+          DJANGO_AWS_S3_CUSTOM_DOMAIN=${{ secrets.AWS_S3_CUSTOM_DOMAIN }}
+          DJANGO_ADMIN_URL='admin/'
+          SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
+          TALLY_SIGNING_SECRET=${{ secrets.TALLY_SIGNING_SECRET }}
+          POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}
+          POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+          CORE_SERVICE_AWS_ACCESS_KEY_ID=${{ secrets.CORE_SERVICE_AWS_ACCESS_KEY_ID }}
+          CORE_AWS_SECRET_ACCESS_KEY=${{ secrets.CORE_AWS_SECRET_ACCESS_KEY }}
+          CORE_AWS_STORAGE_BUCKET_NAME=${{ secrets.CORE_AWS_STORAGE_BUCKET_NAME }}
+          CORE_AWS_S3_REGION_NAME=${{ secrets.CORE_AWS_S3_REGION_NAME }}
+          JWT_SIGNING_KEY=${{ secrets.JWT_SIGNING_KEY }}
+          API_PAGE_SIZE=${{secrets.API_PAGE_SIZE}}
+          SENDGRID_ORDER_TEMPLATE_ID=${{ secrets.SENDGRID_ORDER_TEMPLATE_ID }}
+          SENDGRID_FROM_EMAIL=${{ secrets.SENDGRID_FROM_EMAIL }}
+          SENDGRID_ORDER_EXTRA_EMAIL=${{ secrets.SENDGRID_ORDER_EXTRA_EMAIL }}
+          SENDGRID_COMPANY_NAME=${{ secrets.SENDGRID_COMPANY_NAME }}
+          SENDGRID_PASSWORD_RECOVERY_TEMPLATE_ID=${{ secrets.SENDGRID_PASSWORD_RECOVERY_TEMPLATE_ID }}
+          RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}
+          DJANGO_EMAIL_BACKEND=${{ secrets.DJANGO_EMAIL_BACKEND }}
+          DJANGO_DEFAULT_FROM_EMAIL=${{ secrets.DJANGO_DEFAULT_FROM_EMAIL }}
+          FRONTEND_BASE_URL=${{ secrets.FRONTEND_BASE_URL }}
+          FRONTEND_DEV_URL=${{ secrets.FRONTEND_DEV_URL }}
+          GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }}
+          GOOGLE_REDIRECT_URL=${{ secrets.GOOGLE_REDIRECT_URL }}
+          EOL
+
+      - name: Generate docker-compose.override.yml
+        run: |
+          cat > docker-compose.override.yml <<EOL
+          services:
+            django:
+              image: ${{ steps.login-ecr.outputs.registry }}/altempo/backend:${{ env.ENV_REF }}-${{ github.sha }}
+
+            traefik:
+              image: ${{ steps.login-ecr.outputs.registry }}/altempo/traefik:${{ env.ENV_REF }}-${{ github.sha }}
+          EOL
+
+      - name: Upload docker-compose and .env files to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_PUBLIC_IP }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: docker-compose.production.yml,docker-compose.override.yml,.env
+          target: /home/ubuntu/backend
+          overwrite: true
+
+      - name: SSH into EC2 to run docker compose
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.EC2_PUBLIC_IP }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/backend
+            docker network create web
+            aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
+            docker compose -f docker-compose.production.yml -f docker-compose.override.yml up --pull always --quiet-pull -d
+            docker image prune -a -f
+
+      - name: Check Django logs
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.EC2_PUBLIC_IP }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/backend
+            docker compose -f docker-compose.production.yml -f docker-compose.override.yml logs --tail=100 django

@@ -1,0 +1,40 @@
+from django.urls import path
+from orders.views import (
+    EventTypeListView,
+    CustomerLifecycleListView,
+    EventGoalListView,
+    MusicAmbianceTypeListView,
+    OrderCreateView,
+    OrderServiceTypeListView,
+    SoundPackageListView,
+    OrderTemplateListView,
+    OrderOneView,
+    ListOrdersActiveView,
+    CountOrdersActiveView,
+    ListOrdersByCategoryView,
+    NearestOrderView,
+    OrderItemView,
+    OrderUpdateView,
+    OrderAdminView,
+    MusicProjectsToOrderView
+)
+
+urlpatterns = [
+    path('orders/', OrderCreateView.as_view(), name='order-create'),
+    path('orders/event-types/', EventTypeListView.as_view(), name='event-type-list'),
+    path('orders/customer-lifecycles/', CustomerLifecycleListView.as_view(), name='customer-lyfecycles-list'),
+    path('orders/event-goals/', EventGoalListView.as_view(), name='event-goals-list'),
+    path('orders/music-ambience-types/', MusicAmbianceTypeListView.as_view(), name='music-ambience-types-list'),
+    path('orders/service-types/', OrderServiceTypeListView.as_view(), name='service-types-list'),
+    path('orders/sound-packages/', SoundPackageListView.as_view(), name='sound-packages-list'),
+    path('orders/templates/', OrderTemplateListView.as_view(), name="order-template-list"),
+    path('orders/active/list', ListOrdersActiveView.as_view(), name="order-active-list"),
+    path('orders/active/count', CountOrdersActiveView.as_view(), name="order-active-list"),
+    path('orders/by-category', ListOrdersByCategoryView.as_view(), name="order-list-by-category"),
+    path("orders/nearest", NearestOrderView.as_view(), name="orders-nearest"),
+    path("orderitems/list", OrderItemView.as_view(), name="orders-item-list"),
+    path("ordersupdate/", OrderUpdateView.as_view(), name="order-update-one"),
+    path('orders/<id>/', OrderOneView.as_view(), name="manage-order-one"),
+    path('orders-admin/', OrderAdminView.as_view(), name="order-admin-view"),
+    path('orders/<id>/music-projects/', MusicProjectsToOrderView.as_view(), name='music-projects-to-order'),
+]

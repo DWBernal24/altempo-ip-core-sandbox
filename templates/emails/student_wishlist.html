@@ -1,0 +1,114 @@
+{% extends "emails/base_email.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "You're on the List!" %} - Altempo{% endblock %}
+
+{% block content %}
+    <h1 class="headline">{% trans "Thanks for Your Interest!" %}</h1>
+
+    <p class="body-text">
+        {% blocktrans with user_name=user_name %}
+        Hi {{ user_name }}, thank you for signing up for Altempo! We're excited to have you join our community of musicians and music enthusiasts.
+        {% endblocktrans %}
+    </p>
+
+    <p class="body-text">
+        {% trans "We're currently building amazing features specifically designed for students like you. You've been added to our wishlist, and we'll notify you as soon as the student platform is ready!" %}
+    </p>
+
+    <div style="background-color: #f7f5f8; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+        <p style="font-size: 48px; margin: 0 0 12px 0;">🎓</p>
+        <p style="color: #7605e1; font-size: 18px; font-weight: 600; margin: 0 0 8px 0;">
+            {% trans "You're on the Wishlist!" %}
+        </p>
+        <p style="color: #71717a; font-size: 14px; margin: 0;">
+            {% trans "We'll email you when we're ready for students" %}
+        </p>
+    </div>
+
+    <p class="body-text">
+        {% trans "In the meantime, here's what you can expect:" %}
+    </p>
+
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
+        <tr>
+            <td style="padding: 12px 0;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td style="vertical-align: top; padding-right: 12px;">
+                            <div style="background-color: #7605e1; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px;">
+                                🎵
+                            </div>
+                        </td>
+                        <td style="vertical-align: top;">
+                            <p style="color: #18181b; font-size: 16px; font-weight: 600; margin: 0 0 4px 0;">
+                                {% trans "Connect with Musicians" %}
+                            </p>
+                            <p style="color: #71717a; font-size: 14px; margin: 0; line-height: 1.5;">
+                                {% trans "Find and collaborate with other students and professional musicians" %}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 12px 0;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td style="vertical-align: top; padding-right: 12px;">
+                            <div style="background-color: #7605e1; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px;">
+                                📚
+                            </div>
+                        </td>
+                        <td style="vertical-align: top;">
+                            <p style="color: #18181b; font-size: 16px; font-weight: 600; margin: 0 0 4px 0;">
+                                {% trans "Learning Resources" %}
+                            </p>
+                            <p style="color: #71717a; font-size: 14px; margin: 0; line-height: 1.5;">
+                                {% trans "Access exclusive educational content and tutorials" %}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 12px 0;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                        <td style="vertical-align: top; padding-right: 12px;">
+                            <div style="background-color: #7605e1; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px;">
+                                🎸
+                            </div>
+                        </td>
+                        <td style="vertical-align: top;">
+                            <p style="color: #18181b; font-size: 16px; font-weight: 600; margin: 0 0 4px 0;">
+                                {% trans "Student Projects" %}
+                            </p>
+                            <p style="color: #71717a; font-size: 14px; margin: 0; line-height: 1.5;">
+                                {% trans "Create and manage your music projects with ease" %}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <p class="body-text">
+        {% trans "We'll keep you updated on our progress. Get ready to make some music!" %}
+    </p>
+
+    <p class="meta-text">
+        {% trans "Have questions? Feel free to reach out to our support team anytime." %}
+    </p>
+{% endblock %}
+
+{% block help_center_url %}{{ help_center_url }}{% endblock %}
+{% block terms_url %}{{ terms_url }}{% endblock %}
+{% block privacy_url %}{{ privacy_url }}{% endblock %}
+{% block unsubscribe_url %}{{ unsubscribe_url }}{% endblock %}
+{% block instagram_url %}{{ instagram_url }}{% endblock %}
+{% block linkedin_url %}{{ linkedin_url }}{% endblock %}
+{% block facebook_url %}{{ facebook_url }}{% endblock %}
