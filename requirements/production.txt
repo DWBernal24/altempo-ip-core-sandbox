@@ -3,14 +3,14 @@
 -r base.txt
 
 gunicorn==23.0.0  # https://github.com/benoitc/gunicorn
-psycopg[c]==3.2.5  # https://github.com/psycopg/psycopg
-Collectfasta==3.2.1  # https://github.com/jasongi/collectfasta
+psycopg[c]==3.3.3  # https://github.com/psycopg/psycopg
+Collectfasta==3.3.3  # https://github.com/jasongi/collectfasta
 
 # Django
 # ------------------------------------------------------------------------------
 django-anymail[sendgrid,resend]==12.0  # https://github.com/anymail/django-anymail
 
 django-extensions==3.2.3  # https://github.com/django-extensions/django-extensions
-supabase==2.13.0 # https://pypi.org/project/supabase/
+supabase==2.28.0 # https://pypi.org/project/supabase/
 
 django-safedelete==1.4.1 # Soft delete functionality
