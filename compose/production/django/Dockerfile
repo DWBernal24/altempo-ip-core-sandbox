@@ -1,4 +1,4 @@
-FROM docker.io/python:3.12-slim AS python
+FROM docker.io/python:3.12.13-slim AS python
 
 FROM python AS python-build-stage
 
