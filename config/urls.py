@@ -31,6 +31,7 @@ urlpatterns = [
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
+
 if settings.DEBUG:
     # Static file serving when using Gunicorn + Uvicorn for local web socket development
     urlpatterns += staticfiles_urlpatterns()
@@ -59,6 +60,9 @@ urlpatterns += [
 
     # Core
     path('api/', include('core.urls')),
+
+    # Core API (RBAC permissions endpoint)
+    path('api/', include('core.api.urls')),
 
     # Orders
     path('api/', include('orders.urls')),

@@ -1,18 +1,25 @@
-from os import environ
+from os import environ 
 from rest_framework import serializers, views, response, status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from drf_spectacular.utils import extend_schema
+
+from core.rbac import RBACPermission  # ✅ RBAC IMPORT
+
 from roles.serializers import (
     RoleSerializer, UserProfileSerializer, UserProfileGetSerializer, DemografySerializer, KeyDatesSerializer,
     ListDeListDemografyProfileSerializer, KeyDatesProfileSerializer, ListDeListDemografyProfileExtraSerializer,
     KeyDatesProfileExtraSerializer,
 )
+
 from roles.models import Role, UserProfile, Demografy, KeyDates, ListDemografyProfile, KeyDatesProfile
 from utils.email import send_template_email
 
 
 class RoleListCreateView(views.APIView):
+
+    permission_classes = [IsAuthenticated, RBACPermission]  # ✅ RBAC
+    required_permission = "users.update"
 
     @extend_schema(
         summary="Get the list of roles",
@@ -40,6 +47,10 @@ class RoleListCreateView(views.APIView):
 
 
 class DemografyView(views.APIView):
+
+    permission_classes = [IsAuthenticated, RBACPermission]
+    required_permission = "profile.read"
+
     def get(self, request):
         paginator = PageNumberPagination()
         demografies = Demografy.objects.all()
@@ -47,7 +58,12 @@ class DemografyView(views.APIView):
         serializer = DemografySerializer(result_page, many=True)
         return paginator.get_paginated_response(serializer.data)
 
+
 class KeyDatesView(views.APIView):
+
+    permission_classes = [IsAuthenticated, RBACPermission]
+    required_permission = "profile.read"
+
     def get(self, request):
         paginator = PageNumberPagination()
         data = KeyDates.objects.all()
@@ -55,8 +71,12 @@ class KeyDatesView(views.APIView):
         serializer = KeyDatesSerializer(result_page, many=True)
         return paginator.get_paginated_response(serializer.data)
 
+
 class ListDeListDemografyProfileView(views.APIView):
-    permission_classes = [IsAuthenticated]
+
+    permission_classes = [IsAuthenticated, RBACPermission]
+    required_permission = "profile.update"
+
     def get(self, request):
         paginator = PageNumberPagination()
         user = request.user
@@ -86,8 +106,12 @@ class ListDeListDemografyProfileView(views.APIView):
         ListDemografyProfile.objects.filter(id=pk, profile=profile).delete()
         return response.Response({"message": "Parametro no definido"}, status=status.HTTP_200_OK)
 
+
 class KeyDatesProfileView(views.APIView):
-    permission_classes = [IsAuthenticated]
+
+    permission_classes = [IsAuthenticated, RBACPermission]
+    required_permission = "profile.update"
+
     def get(self, request):
         paginator = PageNumberPagination()
         user = request.user
@@ -117,8 +141,11 @@ class KeyDatesProfileView(views.APIView):
         KeyDatesProfile.objects.filter(id=pk, profile=profile).delete()
         return response.Response({"message": "Parametro no definido"}, status=status.HTTP_200_OK)
 
+
 class UserProfileCreateView(views.APIView):
-    permission_classes = [IsAuthenticated]
+
+    permission_classes = [IsAuthenticated, RBACPermission]
+    required_permission = "profile.update"
 
     @extend_schema(
         summary="Create user profile",
@@ -134,7 +161,6 @@ class UserProfileCreateView(views.APIView):
         if serializer.is_valid():
             serializer.save()
 
-            # Send new user email
             send_template_email(
                 request.user.email,
                 environ.get("SENDGRID_NEW_USER_TEMPLATE_ID"),
@@ -151,7 +177,9 @@ class UserProfileCreateView(views.APIView):
 
 
 class UserProfileGetView(views.APIView):
-    permission_classes = [IsAuthenticated]
+
+    permission_classes = [IsAuthenticated, RBACPermission]
+    required_permission = "profile.read"
 
     def get(self, request):
         try:
